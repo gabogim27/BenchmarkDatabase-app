@@ -18,11 +18,11 @@ COPY ["./DatabasesBenchmark.Infrastructure/DatabasesBenchmark.Infrastructure.csp
 RUN dotnet restore "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj"
 COPY . .
 WORKDIR "/src/DatabasesBenchmark.API"
-RUN dotnet build "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Development
-RUN dotnet publish "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
