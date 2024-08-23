@@ -1,0 +1,6 @@
+@DatabasesBenchmark_HostAddress = http://localhost:5192
+
+GET {{DatabasesBenchmark_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
