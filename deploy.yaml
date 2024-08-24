@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: benchmarkdatabase3
+  labels:
+    app: benchmarkdatabase3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: benchmarkdatabase3
+  template:
+    metadata:
+      labels:
+        app: benchmarkdatabase3
+    spec:
+      containers:
+      - name: benchmarkdatabase3
+        image: aksbenchmark01.azurecr.io/myappimage:v2
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: benchmarkdatabase3
+spec:
+  selector:
+    app: benchmarkdatabase3
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
