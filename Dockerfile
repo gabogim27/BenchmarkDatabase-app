@@ -19,7 +19,7 @@ COPY ["./DatabasesBenchmark.Services/DatabasesBenchmark.Services.csproj", "Datab
 COPY ["./DatabasesBenchmark.Domain/DatabasesBenchmark.Domain.csproj", "DatabasesBenchmark.Domain/"]
 COPY ["./DatabasesBenchmark.Infrastructure/DatabasesBenchmark.Infrastructure.csproj", "DatabasesBenchmark.Infrastructure/"]
 
-RUN dotnet restore "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" --no-cache
+RUN dotnet restore --runtime linux-arm64 "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" --no-cache
 COPY . .
 WORKDIR "/src/DatabasesBenchmark.API"
 RUN dotnet build "./DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
