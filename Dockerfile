@@ -8,10 +8,6 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Development
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
-ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-ENV DOTNET_NOLOGO=true
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /src
 
 COPY ["./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj", "DatabasesBenchmark.API/"]
@@ -19,7 +15,7 @@ COPY ["./DatabasesBenchmark.Services/DatabasesBenchmark.Services.csproj", "Datab
 COPY ["./DatabasesBenchmark.Domain/DatabasesBenchmark.Domain.csproj", "DatabasesBenchmark.Domain/"]
 COPY ["./DatabasesBenchmark.Infrastructure/DatabasesBenchmark.Infrastructure.csproj", "DatabasesBenchmark.Infrastructure/"]
 
-RUN dotnet restore "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" --no-cache
+RUN dotnet restore "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj"
 COPY . .
 WORKDIR "/src/DatabasesBenchmark.API"
 RUN dotnet build "./DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
