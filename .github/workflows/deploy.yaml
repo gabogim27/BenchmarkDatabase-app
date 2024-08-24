@@ -21,4 +21,4 @@ jobs:
           platforms: arm64
 
       - name: Build Docker image
-        run: docker buildx build --platform linux/arm64 -t myappimage:v2 -f ./src/Dockerfile .
+        run: docker buildx build --platform linux/arm64 -t myappimage:v2 -f Dockerfile .
