@@ -15,5 +15,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
       - name: Build Docker image
-        run: docker buildx build --platform linux/arm64 -t myappimage:v2 -f Dockerfile . --load
+        run: docker buildx build --platform linux/arm64 -t myappimage:v2 -f Dockerfile . --load --progress=plain
