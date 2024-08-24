@@ -6,7 +6,7 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Development
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
