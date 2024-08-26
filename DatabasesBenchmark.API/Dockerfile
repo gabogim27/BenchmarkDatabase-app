@@ -7,7 +7,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Development
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj", "DatabasesBenchmark.API/"]
@@ -21,7 +21,7 @@ WORKDIR "/src/DatabasesBenchmark.API"
 RUN dotnet build "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Development
+ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./DatabasesBenchmark.API/DatabasesBenchmark.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

@@ -2,6 +2,7 @@
 {
     public interface IBenchmarkService
     {
+<<<<<<< HEAD
         /// <summary>
         /// Realiza una prueba de rendimiento para la inserción de registros en la base de datos.
         /// </summary>
@@ -24,6 +25,12 @@
         /// <param name="numRegistries">Número de registros a seleccionar, actualizar e insertar.</param>
         /// <param name="numThreads">Número de hilos a utilizar.</param>
         /// <returns>Tiempo total en milisegundos que tomó completar la prueba.</returns>
+=======
+        Task<long> RunInsertionBenchmark(int numRegistries, int numThreads);
+
+        Task<long> RunSelectPlusUpdateBenchmark(int numRegistries, int numThreads);
+
+>>>>>>> 4b81f786cd0f9757a173c02912df4cf971c60ab8
         Task<long> RunSelectPlusUpdatePlusInsertionBenchmark(int numRegistries, int numThreads);
     }
 }

@@ -1,5 +1,8 @@
 ﻿using DatabasesBenchmark.Domain.Entities;
+<<<<<<< HEAD
 using DatabasesBenchmark.Infrastructure.DbContext;
+=======
+>>>>>>> 4b81f786cd0f9757a173c02912df4cf971c60ab8
 using DatabasesBenchmark.Infrastructure.Repositories.Interfaces;
 
 namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
@@ -21,7 +24,22 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
 
         public async Task<int> SaveChangesAsync()
         {
+<<<<<<< HEAD
             return await _context.SaveChangesAsync();
+=======
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var result = await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+>>>>>>> 4b81f786cd0f9757a173c02912df4cf971c60ab8
         }
 
         public void Dispose()

@@ -1,6 +1,11 @@
 using DatabasesBenchmark.Infrastructure.DbContext;
 using DatabasesBenchmark.Infrastructure.Repositories.Implementations;
 using DatabasesBenchmark.Infrastructure.Repositories.Interfaces;
+<<<<<<< HEAD
+=======
+using DatabasesBenchmark.Services.Helpers.Implementations;
+using DatabasesBenchmark.Services.Helpers.Interfaces;
+>>>>>>> 4b81f786cd0f9757a173c02912df4cf971c60ab8
 using DatabasesBenchmark.Services.Implementations;
 using DatabasesBenchmark.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +28,11 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<MySqlBenchmarkDbContext>();
 builder.Services.AddScoped<PostgreBenchmarkDbContext>();
 
+<<<<<<< HEAD
+=======
+builder.Services.AddScoped<IStringHelper, StringHelper>();
+
+>>>>>>> 4b81f786cd0f9757a173c02912df4cf971c60ab8
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
