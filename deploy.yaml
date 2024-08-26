@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: benchmarkdatabase3
-        image: aksbenchmark01.azurecr.io/benchmark-app:v8
+        image: aksbenchmark01.azurecr.io/benchmark-app:v9
         ports:
         - containerPort: 8080
         env:
