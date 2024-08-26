@@ -1,10 +1,10 @@
-﻿using DatabasesBenchmark.Domain.Entities;
+using DatabasesBenchmark.Domain.Entities;
 using DatabasesBenchmark.Domain.Enums;
 using DatabasesBenchmark.Infrastructure.Repositories.Interfaces;
+using DatabasesBenchmark.Services.Exceptions;
+using DatabasesBenchmark.Services.Helpers.Interfaces;
 using DatabasesBenchmark.Services.Interfaces;
 using System.Diagnostics;
-using DatabasesBenchmark.Services.Helpers.Interfaces;
-using DatabasesBenchmark.Services.Exceptions;
 
 namespace DatabasesBenchmark.Services.Implementations
 {
@@ -53,6 +53,7 @@ namespace DatabasesBenchmark.Services.Implementations
             {
                 throw new BenchmarkServiceException("An error occurred while running the insertion benchmark.", ex);
             }
+            
         }
 
         /// <summary>
@@ -165,5 +166,4 @@ namespace DatabasesBenchmark.Services.Implementations
             return id;
         }
     }
-
 }

@@ -1,6 +1,7 @@
 ﻿using DatabasesBenchmark.Domain.Enums;
 using DatabasesBenchmark.Services.Implementations;
 using DatabasesBenchmark.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatabasesBenchmark.API.Controllers

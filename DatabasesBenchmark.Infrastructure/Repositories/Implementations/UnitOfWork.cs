@@ -1,4 +1,5 @@
 ﻿using DatabasesBenchmark.Domain.Entities;
+using DatabasesBenchmark.Infrastructure.DbContext;
 using DatabasesBenchmark.Infrastructure.Repositories.Interfaces;
 
 namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
@@ -43,5 +44,4 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             _context.Dispose();
         }
     }
-
 }
