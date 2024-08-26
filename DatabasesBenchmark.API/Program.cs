@@ -1,11 +1,6 @@
-using DatabasesBenchmark.Infrastructure.DbContext;
-using DatabasesBenchmark.Infrastructure.Repositories.Implementations;
-using DatabasesBenchmark.Infrastructure.Repositories.Interfaces;
-using DatabasesBenchmark.Services.Helpers.Implementations;
-using DatabasesBenchmark.Services.Helpers.Interfaces;
-using DatabasesBenchmark.Services.Implementations;
-using DatabasesBenchmark.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using DatabasesBenchmark.API.Middlewares.Extensions;
+using DatabasesBenchmark.Infrastructure.DI;
+using DatabasesBenchmark.Services.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,19 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<MySqlBenchmarkDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("MySQLConnection"), new MySqlServerVersion(new Version(8, 0, 23))));
-builder.Services.AddDbContext<PostgreBenchmarkDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection")));
-
-builder.Services.AddScoped<IBenchmarkDbContextFactory, BenchmarkDbContextFactory>();
-builder.Services.AddScoped<IBenchmarkService, BenchmarkService>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-builder.Services.AddScoped<MySqlBenchmarkDbContext>();
-builder.Services.AddScoped<PostgreBenchmarkDbContext>();
-
-builder.Services.AddScoped<IStringHelper, StringHelper>();
+builder.Services.AddInfrastructureServicesToDI(builder.Configuration);
+builder.Services.AddServicesToDI(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +25,8 @@ var app = builder.Build();
 //}
 
 //app.UseHttpsRedirection();
+
+app.UseExceptionMiddleware();
 
 app.UseAuthorization();
 

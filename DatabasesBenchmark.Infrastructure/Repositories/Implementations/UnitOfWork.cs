@@ -13,11 +13,12 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             _context = context;
         }
 
-        public IGenericRepository<Benchmark> BenchmarkRepository
-        {
-            get => _benchmarkRepository ??= new GenericRepository<Benchmark>(_context);
-        }
+        public IGenericRepository<Benchmark> BenchmarkRepository => _benchmarkRepository ??= new GenericRepository<Benchmark>(_context);
 
+        /// <summary>
+        /// Asynchronously saves all changes made in the context to the database within a transaction.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, with a result of the number of state entries written to the database.</returns>
         public async Task<int> SaveChangesAsync()
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -34,6 +35,9 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             }
         }
 
+        /// <summary>
+        /// Disposes of the context and releases all resources used by it.
+        /// </summary>
         public void Dispose()
         {
             _context.Dispose();

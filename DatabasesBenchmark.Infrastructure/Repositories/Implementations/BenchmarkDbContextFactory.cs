@@ -15,6 +15,12 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="IUnitOfWork"/> based on the specified database provider.
+        /// </summary>
+        /// <param name="provider">The database provider to use for creating the unit of work.</param>
+        /// <returns>An instance of <see cref="IUnitOfWork"/> configured for the specified database provider.</returns>
+        /// <exception cref="NotSupportedException">Thrown when the specified database provider is not supported.</exception>
         public IUnitOfWork CreateUnitOfWork(DatabaseProvider provider)
         {
             switch (provider)
@@ -32,6 +38,10 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             }
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="MySqlBenchmarkDbContext"/> configured for MySQL database access.
+        /// </summary>
+        /// <returns>An instance of <see cref="MySqlBenchmarkDbContext"/>.</returns>
         private MySqlBenchmarkDbContext CreateMySqlDbContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<MySqlBenchmarkDbContext>();
@@ -41,14 +51,16 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             return new MySqlBenchmarkDbContext(optionsBuilder.Options);
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="PostgreBenchmarkDbContext"/> configured for PostgreSQL database access.
+        /// </summary>
+        /// <returns>An instance of <see cref="PostgreBenchmarkDbContext"/>.</returns>
         private PostgreBenchmarkDbContext CreatePostgresDbContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<PostgreBenchmarkDbContext>();
-            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("PostgreSQLConnection"));
+            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("PostgresConnection"));
 
             return new PostgreBenchmarkDbContext(optionsBuilder.Options);
         }
     }
-
-
 }

@@ -6,6 +6,11 @@ namespace DatabasesBenchmark.Infrastructure.DbContext
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MySqlBenchmarkDbContext>, IDesignTimeDbContextFactory<PostgreBenchmarkDbContext>
     {
+        /// <summary>
+        /// Creates a new instance of <see cref="MySqlBenchmarkDbContext"/> with configuration settings read from the appsettings.json file.
+        /// </summary>
+        /// <param name="args">Command line arguments passed to the factory.</param>
+        /// <returns>A new instance of <see cref="MySqlBenchmarkDbContext"/>.</returns>
         public MySqlBenchmarkDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
@@ -20,6 +25,11 @@ namespace DatabasesBenchmark.Infrastructure.DbContext
             return new MySqlBenchmarkDbContext(optionsBuilder.Options);
         }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="PostgreBenchmarkDbContext"/> with configuration settings read from the appsettings.json file.
+        /// </summary>
+        /// <param name="args">Command line arguments passed to the factory.</param>
+        /// <returns>A new instance of <see cref="PostgreBenchmarkDbContext"/>.</returns>
         PostgreBenchmarkDbContext IDesignTimeDbContextFactory<PostgreBenchmarkDbContext>.CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
@@ -28,7 +38,7 @@ namespace DatabasesBenchmark.Infrastructure.DbContext
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<PostgreBenchmarkDbContext>();
-            optionsBuilder.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection"),
+            optionsBuilder.UseNpgsql(configuration.GetConnectionString("PostgresConnection"),
                     options => options.EnableRetryOnFailure(
                         maxRetryCount: 3,
                         maxRetryDelay: TimeSpan.FromMilliseconds(100),

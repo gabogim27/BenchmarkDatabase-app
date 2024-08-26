@@ -15,22 +15,49 @@ namespace DatabasesBenchmark.Infrastructure.Repositories.Implementations
             _dbSet = _context.Set<T>();
         }
 
+        /// <summary>
+        /// Asynchronously adds the specified entity to the repository.
+        /// </summary>
+        /// <param name="entity">The entity to add. Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
         public async Task InsertAsync(T entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-            await _dbSet.AddAsync(entity);
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            else
+            {
+                await _dbSet.AddAsync(entity);
+            }
         }
 
+        /// <summary>
+        /// Asynchronously retrieves an entity by its identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the entity to retrieve.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the entity with the specified identifier, or null if no such entity is found.</returns>
         public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
+        /// <summary>
+        /// Asynchronously updates the specified entity in the repository.
+        /// </summary>
+        /// <param name="entity">The entity to update. Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
         public async Task UpdateAsync(T entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            else
+            {
+                _dbSet.Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+            }
         }
     }
 
